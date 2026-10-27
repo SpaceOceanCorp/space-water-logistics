@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use these models, please cite them as below."
+title: "Space Water Logistics: open screening models for delivering water in space"
+type: software
+authors:
+  - name: "Space Ocean Corp"
+    website: "https://spaceoceancorp.com"
+repository-code: "https://github.com/SpaceOceanCorp/space-water-logistics"
+license: Apache-2.0
+version: 0.1.0
+date-released: 2026-10-05
+keywords:
+  - space
+  - water
+  - logistics
+  - ECLSS
+  - ISRU

@@ -1,0 +1,20 @@
+[project]
+name = "space-water-logistics"
+version = "0.1.0"
+description = "Open screening models for delivering water in space: crew water loop, lunar settlement water, water delivery gear ratio"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+authors = [{name = "Space Ocean Corp"}]
+requires-python = ">=3.10"
+keywords = ["space", "water", "logistics", "ECLSS", "ISRU", "cislunar"]
+
+[project.urls]
+Homepage = "https://github.com/SpaceOceanCorp/space-water-logistics"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = {"" = "models"}
+py-modules = ["crew_water_loop", "lunar_settlement_water", "water_delivery_gear_ratio"]

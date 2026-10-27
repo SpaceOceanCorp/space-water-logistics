@@ -18,3 +18,6 @@ jobs:
           python models/crew_water_loop.py
           python models/lunar_settlement_water.py
           python models/water_delivery_gear_ratio.py
+      - run: |
+          pip install .
+          cd /tmp && python -c "import crew_water_loop, lunar_settlement_water, water_delivery_gear_ratio"

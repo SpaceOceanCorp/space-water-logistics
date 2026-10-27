@@ -45,6 +45,18 @@ python -m unittest discover -s tests
 
 Python 3.10 or later, standard library only.
 
+## Install
+
+```
+pip install git+https://github.com/SpaceOceanCorp/space-water-logistics
+```
+
+Then `from crew_water_loop import water_loop_budget`, `import lunar_settlement_water` or `import water_delivery_gear_ratio`.
+
+## Cite
+
+GitHub shows a "Cite this repository" button from [CITATION.cff](CITATION.cff).
+
 ## License
 
 Apache-2.0. See [LICENSE](LICENSE).
