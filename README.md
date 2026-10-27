@@ -1,5 +1,7 @@
 # Space Water Logistics
 
+[![tests](https://github.com/SpaceOceanCorp/space-water-logistics/actions/workflows/tests.yml/badge.svg)](https://github.com/SpaceOceanCorp/space-water-logistics/actions/workflows/tests.yml)
+
 Open models for delivering water in space, from [Space Ocean Corp](https://spaceoceancorp.com).
 
 Listed in [Awesome Space](https://github.com/orbitalindex/awesome-space#mission-design) under Mission Design.
