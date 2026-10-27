@@ -37,7 +37,7 @@
   label small { font-weight: 400; color: var(--muted); }
   .row { display: flex; align-items: center; gap: 10px; }
   input[type=range] { flex: 1; accent-color: var(--orange); min-width: 0; }
-  input[type=number] { width: 110px; font: inherit; font-size: 14px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px;
+  input[type=number], input[type=text] { width: 110px; font: inherit; font-size: 14px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px;
     background: var(--bg); color: var(--ink); }
   .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .stat { background: var(--chip); border-radius: 8px; padding: 14px; }
@@ -103,7 +103,7 @@
     <p class="q">How long does local lunar ice last a settlement, and how much water must be imported to keep it supplied?</p>
     <div class="grid">
       <div>
-        <label>Population <small>people</small></label><div class="row"><input type="range" min="0" max="7" step="0.1" data-k="logpop" data-log><input type="number" min="1" step="1" data-k="pop"></div>
+        <label>Population <small>people</small></label><div class="row"><input type="range" min="0" max="7" step="0.1" data-k="logpop" data-log><input type="text" inputmode="numeric" autocomplete="off" data-k="pop" data-commas aria-label="Population"></div>
         <label>Water use <small>tons per person per year (paper's estimate 500)</small></label><div class="row"><input type="range" min="10" max="1000" step="5" data-k="use"><input type="number" min="1" step="1" data-k="use"></div>
         <label>Recycling efficiency <small>% (ISS best about 98%)</small></label><div class="row"><input type="range" min="0" max="99.9" step="0.1" data-k="eff" data-pct><input type="number" min="0" max="100" step="0.1" data-k="eff" data-pct></div>
         <label>Local ice inventory <small>billion tons</small></label><div class="row"><input type="range" min="0.1" max="10" step="0.1" data-k="inv"><input type="number" min="0" step="0.1" data-k="inv"></div>
@@ -150,7 +150,8 @@
   "use strict";
   const M = window.SWL;
   const fmt = (x, d = 0) => (Number.isFinite(x) ? x.toLocaleString("en-US", { maximumFractionDigits: d, minimumFractionDigits: d }) : "never");
-  const tons = (t) => (t >= 1e6 ? fmt(t / 1e6, 1) + " million t" : fmt(t) + " t");
+  // non-breaking spaces keep a number and its unit on one line
+  const tons = (t) => (t >= 1e6 ? fmt(t / 1e6, 1) + "\u00a0million\u00a0t" : fmt(t) + "\u00a0t");
 
   // tabs
   document.querySelectorAll("nav button").forEach((b) => b.addEventListener("click", () => {
@@ -168,16 +169,19 @@
       if (k === "logpop") { el.value = Math.log10(state.pop); return; }
       let v = state[k];
       if (el.hasAttribute("data-pct")) v = +(v * 100).toFixed(3);
-      if (document.activeElement !== el) el.value = v;
+      if (document.activeElement !== el) el.value = el.hasAttribute("data-commas") ? fmt(v) : v;
     });
     inputs.forEach((el) => el.addEventListener("input", () => {
-      let v = parseFloat(el.value);
+      let v = parseFloat(el.value.replace(/,/g, ""));
       if (!Number.isFinite(v)) return;
       const k = el.dataset.k;
       if (k === "logpop") { state.pop = Math.round(10 ** v); }
       else { state[k] = el.hasAttribute("data-pct") ? v / 100 : v; }
       show(); render();
     }));
+    // comma boxes reformat when the visitor leaves the box, so typing is never interrupted
+    inputs.forEach((el) => el.hasAttribute("data-commas") &&
+      el.addEventListener("blur", () => { el.value = fmt(state[el.dataset.k]); }));
     show(); render();
   }
 
@@ -205,7 +209,7 @@
     try {
       const yrs = M.yearsToExhaust(lunar.inv * 1e9, lunar.pop, lunar.use, lunar.eff);
       err.textContent = "";
-      document.getElementById("lunar-years").textContent = Number.isFinite(yrs) ? fmt(yrs) + " years" : "never";
+      document.getElementById("lunar-years").textContent = Number.isFinite(yrs) ? fmt(yrs) + (Math.round(yrs) === 1 ? "\u00a0year" : "\u00a0years") : "never";
       document.getElementById("lunar-loss").textContent = tons(M.netLossTPerYear(lunar.pop, lunar.use, lunar.eff));
       const lpd = M.landersPerDay(lunar.pop, lunar.use, lunar.eff, lunar.lander);
       // small settlements need a fraction of a lander per day; show real digits, not 0.00
