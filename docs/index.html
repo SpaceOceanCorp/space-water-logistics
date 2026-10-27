@@ -103,7 +103,7 @@
     <p class="q">How long does local lunar ice last a settlement, and how much water must be imported to keep it supplied?</p>
     <div class="grid">
       <div>
-        <label>Population <small>people</small></label><div class="row"><input type="range" min="2" max="7" step="0.1" data-k="logpop" data-log><input type="number" min="1" step="1" data-k="pop"></div>
+        <label>Population <small>people</small></label><div class="row"><input type="range" min="0" max="7" step="0.1" data-k="logpop" data-log><input type="number" min="1" step="1" data-k="pop"></div>
         <label>Water use <small>tons per person per year (paper's estimate 500)</small></label><div class="row"><input type="range" min="10" max="1000" step="5" data-k="use"><input type="number" min="1" step="1" data-k="use"></div>
         <label>Recycling efficiency <small>% (ISS best about 98%)</small></label><div class="row"><input type="range" min="0" max="99.9" step="0.1" data-k="eff" data-pct><input type="number" min="0" max="100" step="0.1" data-k="eff" data-pct></div>
         <label>Local ice inventory <small>billion tons</small></label><div class="row"><input type="range" min="0.1" max="10" step="0.1" data-k="inv"><input type="number" min="0" step="0.1" data-k="inv"></div>
@@ -207,7 +207,10 @@
       err.textContent = "";
       document.getElementById("lunar-years").textContent = Number.isFinite(yrs) ? fmt(yrs) + " years" : "never";
       document.getElementById("lunar-loss").textContent = tons(M.netLossTPerYear(lunar.pop, lunar.use, lunar.eff));
-      document.getElementById("lunar-landers").textContent = fmt(M.landersPerDay(lunar.pop, lunar.use, lunar.eff, lunar.lander), 2);
+      const lpd = M.landersPerDay(lunar.pop, lunar.use, lunar.eff, lunar.lander);
+      // small settlements need a fraction of a lander per day; show real digits, not 0.00
+      document.getElementById("lunar-landers").textContent =
+        lpd === 0 ? "none needed" : lpd < 0.01 ? "1 every " + fmt(1 / lpd) + " days" : fmt(lpd, 2);
     } catch (e) { err.textContent = e.message; }
   });
 
