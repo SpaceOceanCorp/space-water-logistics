@@ -24,7 +24,7 @@ Headline results:
 
 | Project | Contribution | Status |
 |---|---|---|
-| [sidus-tools](https://github.com/massimodeluisa/sidus-tools) | Crew water loop & resupply tool: daily water demand, recycling, loop closure and resupply mass, with NASA BVAD Rev2 defaults | [PR #212](https://github.com/massimodeluisa/sidus-tools/pull/212) (open) |
+| [sidus-tools](https://github.com/massimodeluisa/sidus-tools) | Crew water loop & resupply tool: daily water demand, recycling, loop closure and resupply mass, with NASA BVAD Rev2 defaults | [PR #212](https://github.com/massimodeluisa/sidus-tools/pull/212) (merged) |
 | [space-logistics-optimization](https://github.com/masaisaji/space-logistics-optimization) | Optional water recovery rate for lunar surface consumption | [PR #1](https://github.com/masaisaji/space-logistics-optimization/pull/1) (open) |
 | [Awesome Space](https://github.com/orbitalindex/awesome-space) | Listing for this repository under Mission Design | [PR #127](https://github.com/orbitalindex/awesome-space/pull/127) (merged) |
 
