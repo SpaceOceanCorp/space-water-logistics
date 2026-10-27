@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Space Water Logistics</title>
+<meta name="description" content="Open screening calculators for water in space: crew water loop, lunar settlement water, and Earth vs lunar water delivery. From Space Ocean Corp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF3100; --ink: #0A0A0B; --bg: #FAFAF8; --card: #FFFFFF; --muted: #5C5C60; --line: #E2E2DE;
+    --good: #1F7A4D; --chip: #F2F2EE; --orange-ink: #C42600;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #F4F4F2; --bg: #0A0A0B; --card: #141416; --muted: #A4A4A8; --line: #2A2A2E; --good: #4CC38A; --chip: #1C1C1F; --orange-ink: #FF6A45; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 Montserrat, system-ui, sans-serif; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 40px 0 8px; }
+  .kicker { color: var(--orange-ink); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: 13px; }
+  h1 { font-size: clamp(28px, 5vw, 44px); line-height: 1.1; margin: 8px 0 12px; }
+  .lede { color: var(--muted); max-width: 680px; margin: 0; }
+  nav { display: flex; gap: 8px; flex-wrap: wrap; margin: 24px 0 8px; }
+  nav button { font: inherit; font-weight: 600; font-size: 14px; border: 1px solid var(--line); background: var(--card); color: var(--ink);
+    padding: 8px 14px; border-radius: 6px; cursor: pointer; }
+  nav button[aria-selected="true"] { background: var(--orange); border-color: var(--orange); color: #0A0A0B; }
+  section.panel { display: none; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 24px; margin: 16px 0 32px; }
+  section.panel.on { display: block; }
+  h2 { margin: 0 0 4px; font-size: 22px; }
+  .q { color: var(--muted); margin: 0 0 20px; }
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+  label { display: block; font-size: 14px; font-weight: 600; margin: 14px 0 4px; }
+  label small { font-weight: 400; color: var(--muted); }
+  .row { display: flex; align-items: center; gap: 10px; }
+  input[type=range] { flex: 1; accent-color: var(--orange); min-width: 0; }
+  input[type=number] { width: 110px; font: inherit; font-size: 14px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px;
+    background: var(--bg); color: var(--ink); }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat { background: var(--chip); border-radius: 8px; padding: 14px; }
+  .stat .v { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .stat .k { font-size: 13px; color: var(--muted); }
+  .stat.hero { grid-column: 1 / -1; border-left: 4px solid var(--orange); }
+  .bar { height: 10px; background: var(--line); border-radius: 5px; overflow: hidden; margin-top: 8px; }
+  .bar span { display: block; height: 100%; background: var(--orange); }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { text-align: right; padding: 10px 8px; border-bottom: 1px solid var(--line); }
+  th:first-child, td:first-child { text-align: left; }
+  th { font-size: 13px; color: var(--muted); font-weight: 600; }
+  .note { font-size: 13px; color: var(--muted); margin-top: 16px; }
+  .err { color: var(--orange-ink); font-weight: 600; min-height: 1.5em; }
+  footer { color: var(--muted); font-size: 13px; padding: 8px 0 48px; }
+  a { color: var(--orange-ink); }
+  .tip { background: var(--chip); border-radius: 8px; padding: 12px 14px; font-size: 14px; margin-top: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Space Ocean Corp · open models</div>
+    <h1>Space Water Logistics</h1>
+    <p class="lede">Three screening calculators for water in space. Move a slider and the answer updates. Every default comes from a public source, and every number matches the Python models in <a href="https://github.com/SpaceOceanCorp/space-water-logistics">the repository</a> (a test checks it).</p>
+    <nav role="tablist">
+      <button role="tab" data-tab="loop" aria-selected="true">Crew water loop</button>
+      <button role="tab" data-tab="lunar" aria-selected="false">Lunar settlement water</button>
+      <button role="tab" data-tab="gear" aria-selected="false">Earth vs lunar water</button>
+    </nav>
+  </header>
+
+  <section class="panel on" id="loop" role="tabpanel">
+    <h2>Crew water loop</h2>
+    <p class="q">How much water must be shipped for a crewed mission, and how much does recycling save?</p>
+    <div class="grid">
+      <div>
+        <label>Crew <small>people</small></label><div class="row"><input type="range" min="1" max="12" step="1" data-k="crew"><input type="number" min="1" step="1" data-k="crew"></div>
+        <label>Mission length <small>days</small></label><div class="row"><input type="range" min="10" max="1000" step="10" data-k="days"><input type="number" min="1" step="1" data-k="days"></div>
+        <label>Urine recovery <small>% (ISS UPA 85%, with brine processor about 98%)</small></label><div class="row"><input type="range" min="0" max="100" step="1" data-k="eta_urine" data-pct><input type="number" min="0" max="100" step="1" data-k="eta_urine" data-pct></div>
+        <label>Hygiene water recovery <small>% (ISS collects none)</small></label><div class="row"><input type="range" min="0" max="100" step="1" data-k="eta_hygiene" data-pct><input type="number" min="0" max="100" step="1" data-k="eta_hygiene" data-pct></div>
+        <label>O2 made from water <small>kg per person-day (0 if O2 is shipped as gas)</small></label><div class="row"><input type="range" min="0" max="1.2" step="0.01" data-k="o2"><input type="number" min="0" step="0.01" data-k="o2"></div>
+        <label>Contingency reserve <small>%</small></label><div class="row"><input type="range" min="0" max="50" step="1" data-k="reserve" data-pct><input type="number" min="0" step="1" data-k="reserve" data-pct></div>
+        <div class="err" id="loop-err"></div>
+      </div>
+      <div>
+        <div class="stats">
+          <div class="stat hero"><div class="v" id="loop-mission"></div><div class="k">water to ship for the mission</div></div>
+          <div class="stat"><div class="v" id="loop-open"></div><div class="k">with no recycling</div></div>
+          <div class="stat"><div class="v" id="loop-saved"></div><div class="k">launch mass avoided</div></div>
+          <div class="stat"><div class="v" id="loop-demand"></div><div class="k">demand per person-day</div></div>
+          <div class="stat"><div class="v" id="loop-makeup"></div><div class="k">makeup per person-day</div></div>
+          <div class="stat hero"><div class="k">Loop closure: share of demand met by recycling</div><div class="v" id="loop-closure"></div><div class="bar"><span id="loop-bar"></span></div></div>
+        </div>
+        <div class="tip">Try this: raise urine recovery from 85% to 98% (what the ISS reached with its brine processor) and watch the shipped mass fall.</div>
+      </div>
+    </div>
+    <p class="note">Rates from NASA Life Support Baseline Values and Assumptions Document, NASA/TP-2015-218570 Rev2, Tables 4-20 and 4-21. Steady-state mass balance; no storage dynamics, brine consumables or EVA water.</p>
+  </section>
+
+  <section class="panel" id="lunar" role="tabpanel">
+    <h2>Lunar settlement water</h2>
+    <p class="q">How long does local lunar ice last a settlement, and how much water must be imported to keep it supplied?</p>
+    <div class="grid">
+      <div>
+        <label>Population <small>people</small></label><div class="row"><input type="range" min="2" max="7" step="0.1" data-k="logpop" data-log><input type="number" min="1" step="1" data-k="pop"></div>
+        <label>Water use <small>tons per person per year (paper's estimate 500)</small></label><div class="row"><input type="range" min="10" max="1000" step="5" data-k="use"><input type="number" min="1" step="1" data-k="use"></div>
+        <label>Recycling efficiency <small>% (ISS best about 98%)</small></label><div class="row"><input type="range" min="0" max="99.9" step="0.1" data-k="eff" data-pct><input type="number" min="0" max="100" step="0.1" data-k="eff" data-pct></div>
+        <label>Local ice inventory <small>billion tons</small></label><div class="row"><input type="range" min="0.1" max="10" step="0.1" data-k="inv"><input type="number" min="0" step="0.1" data-k="inv"></div>
+        <label>Lander payload <small>tons</small></label><div class="row"><input type="range" min="10" max="2000" step="10" data-k="lander"><input type="number" min="1" step="1" data-k="lander"></div>
+        <div class="err" id="lunar-err"></div>
+      </div>
+      <div>
+        <div class="stats">
+          <div class="stat hero"><div class="v" id="lunar-years"></div><div class="k">until local ice runs out</div></div>
+          <div class="stat"><div class="v" id="lunar-loss"></div><div class="k">water lost per year</div></div>
+          <div class="stat"><div class="v" id="lunar-landers"></div><div class="k">landers per day to replace it</div></div>
+        </div>
+        <div class="tip">Try this: set 1,000,000 people at 98% recycling. That loses 10 million tons a year, about 27 landers of 1,000 tons every day.</div>
+      </div>
+    </div>
+    <p class="note">Reproduces Elvis &amp; McDowell (2026), "No cities on the Moon", Frontiers in Space Technologies 7:1894104 (CC BY). Linear depletion at constant population and use; no propellant drawn from the same ice.</p>
+  </section>
+
+  <section class="panel" id="gear" role="tabpanel">
+    <h2>Earth vs lunar water</h2>
+    <p class="q">To deliver 1 kg of water, how much must already be in low Earth orbit (water from Earth), or be mined on the Moon (water from the Moon, propellant made from the same water)?</p>
+    <div class="grid">
+      <div>
+        <label>Engine specific impulse <small>seconds (H2/O2 about 450)</small></label><div class="row"><input type="range" min="250" max="470" step="5" data-k="isp"><input type="number" min="1" step="1" data-k="isp"></div>
+        <label>Stage dry mass <small>% of propellant carried (tanks and structure)</small></label><div class="row"><input type="range" min="0" max="40" step="1" data-k="dry" data-pct><input type="number" min="0" step="1" data-k="dry" data-pct></div>
+        <div class="err" id="gear-err"></div>
+        <div class="tip">Earth numbers leave out the climb from the ground to orbit, which every kilogram in orbit has already paid for: 9.3 to 10 km/s. Lunar numbers count water mined, not the mining equipment.</div>
+      </div>
+      <div>
+        <table>
+          <thead><tr><th>Destination</th><th>From Earth: kg in LEO per kg</th><th>From Moon: kg mined per kg</th></tr></thead>
+          <tbody id="gear-body"></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="note">One ideal expendable chemical stage per leg (rocket equation). Delta-v from the Wikipedia "Delta-v budget" Earth-Moon table; returns to LEO assume aerobraking.</p>
+  </section>
+
+  <footer>Screening tools, not flight plans. Apache-2.0. <a href="https://github.com/SpaceOceanCorp/space-water-logistics">Source and Python models</a> · <a href="https://spaceoceancorp.com">Space Ocean Corp</a></footer>
+</div>
+<script src="models.js"></script>
+<script>
+(function () {
+  "use strict";
+  const M = window.SWL;
+  const fmt = (x, d = 0) => (Number.isFinite(x) ? x.toLocaleString("en-US", { maximumFractionDigits: d, minimumFractionDigits: d }) : "never");
+  const tons = (t) => (t >= 1e6 ? fmt(t / 1e6, 1) + " million t" : fmt(t) + " t");
+
+  // tabs
+  document.querySelectorAll("nav button").forEach((b) => b.addEventListener("click", () => {
+    document.querySelectorAll("nav button").forEach((x) => x.setAttribute("aria-selected", x === b));
+    document.querySelectorAll("section.panel").forEach((p) => p.classList.toggle("on", p.id === b.dataset.tab));
+    try { localStorage.setItem("swl-tab", b.dataset.tab); } catch (e) {}
+  }));
+  try { const t = localStorage.getItem("swl-tab"); if (t) document.querySelector(`nav button[data-tab="${t}"]`)?.click(); } catch (e) {}
+
+  // two-way bind a slider and a number box per key; values held in model units
+  function bind(panel, state, render) {
+    const inputs = panel.querySelectorAll("input[data-k]");
+    const show = () => inputs.forEach((el) => {
+      const k = el.dataset.k;
+      if (k === "logpop") { el.value = Math.log10(state.pop); return; }
+      let v = state[k];
+      if (el.hasAttribute("data-pct")) v = +(v * 100).toFixed(3);
+      if (document.activeElement !== el) el.value = v;
+    });
+    inputs.forEach((el) => el.addEventListener("input", () => {
+      let v = parseFloat(el.value);
+      if (!Number.isFinite(v)) return;
+      const k = el.dataset.k;
+      if (k === "logpop") { state.pop = Math.round(10 ** v); }
+      else { state[k] = el.hasAttribute("data-pct") ? v / 100 : v; }
+      show(); render();
+    }));
+    show(); render();
+  }
+
+  // crew water loop
+  const loop = { crew: 4, days: 180, eta_urine: 0.85, eta_hygiene: 0, o2: 0.82, reserve: 0.1 };
+  bind(document.getElementById("loop"), loop, () => {
+    const err = document.getElementById("loop-err");
+    try {
+      const b = M.waterLoopBudget(loop);
+      err.textContent = "";
+      document.getElementById("loop-mission").textContent = fmt(b.mission) + " kg";
+      document.getElementById("loop-open").textContent = fmt(b.open_loop) + " kg";
+      document.getElementById("loop-saved").textContent = fmt(b.saved) + " kg";
+      document.getElementById("loop-demand").textContent = fmt(b.demand, 2) + " kg";
+      document.getElementById("loop-makeup").textContent = fmt(b.makeup, 2) + " kg";
+      document.getElementById("loop-closure").textContent = fmt(100 * b.closure, 1) + "%";
+      document.getElementById("loop-bar").style.width = (100 * b.closure).toFixed(1) + "%";
+    } catch (e) { err.textContent = e.message; }
+  });
+
+  // lunar settlement
+  const lunar = { pop: 100000, use: 500, eff: 0.98, inv: 1, lander: 1000 };
+  bind(document.getElementById("lunar"), lunar, () => {
+    const err = document.getElementById("lunar-err");
+    try {
+      const yrs = M.yearsToExhaust(lunar.inv * 1e9, lunar.pop, lunar.use, lunar.eff);
+      err.textContent = "";
+      document.getElementById("lunar-years").textContent = Number.isFinite(yrs) ? fmt(yrs) + " years" : "never";
+      document.getElementById("lunar-loss").textContent = tons(M.netLossTPerYear(lunar.pop, lunar.use, lunar.eff));
+      document.getElementById("lunar-landers").textContent = fmt(M.landersPerDay(lunar.pop, lunar.use, lunar.eff, lunar.lander), 2);
+    } catch (e) { err.textContent = e.message; }
+  });
+
+  // gear ratio
+  const gear = { isp: 450, dry: 0.1 };
+  bind(document.getElementById("gear"), gear, () => {
+    const err = document.getElementById("gear-err");
+    try {
+      const rows = M.gearTable(gear.isp, gear.dry);
+      err.textContent = "";
+      document.getElementById("gear-body").innerHTML = rows.map(([d, e, m]) => {
+        const f = (x) => (Number.isFinite(x) ? fmt(x, 2) : "not reachable");
+        return `<tr><td>${d}</td><td>${f(e)}</td><td>${f(m)}</td></tr>`;
+      }).join("");
+    } catch (e) { err.textContent = e.message; }
+  });
+})();
+</script>
+</body>
+</html>

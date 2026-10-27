@@ -8,6 +8,10 @@ Listed in [Awesome Space](https://github.com/orbitalindex/awesome-space#mission-
 
 Water is the heaviest crew consumable and a ready source of propellant. These models size how much water a mission needs, how much recycling saves, and when water from the Moon beats water launched from Earth. Every input comes from a public source, and every model is a screening tool, not a flight plan.
 
+## Try it in the browser
+
+[spaceoceancorp.github.io/space-water-logistics](https://spaceoceancorp.github.io/space-water-logistics/): all three models as calculators with sliders. The page runs [docs/models.js](docs/models.js), a port that a test checks against the Python models to 12 significant digits.
+
 ## Models
 
 | Model | Question it answers | Run |
