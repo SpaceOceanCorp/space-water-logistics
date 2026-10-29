@@ -32,6 +32,11 @@ Headline results:
 |---|---|---|
 | [sidus-tools](https://github.com/massimodeluisa/sidus-tools) | Crew water loop & resupply tool: daily water demand, recycling, loop closure and resupply mass, with NASA BVAD Rev2 defaults | [PR #212](https://github.com/massimodeluisa/sidus-tools/pull/212) (merged) |
 | [space-logistics-optimization](https://github.com/masaisaji/space-logistics-optimization) | Optional water recovery rate for lunar surface consumption | [PR #1](https://github.com/masaisaji/space-logistics-optimization/pull/1) (open) |
+| [mars-sim](https://github.com/mars-sim/mars-sim) | NASA BVAD Rev2 sources for the settlement water rates | [PR #2159](https://github.com/mars-sim/mars-sim/pull/2159) (open) |
+| [selene-isru](https://github.com/dogum/selene-isru) | Gear ratio basis for lunar product used in orbit | [PR #21](https://github.com/dogum/selene-isru/pull/21) (open) |
+| [eclss-sizing-tool](https://github.com/dukesmith0/eclss-sizing-tool) | ISS water recovery with the Brine Processor (98%) as a sourced constant | [PR #1](https://github.com/dukesmith0/eclss-sizing-tool/pull/1) (open) |
+| [Astroid-miner](https://github.com/ksarith/Astroid-miner) | Water delivery gear ratio note | [PR #1](https://github.com/ksarith/Astroid-miner/pull/1) (open) |
+| [Kerbalism](https://github.com/Kerbalism/Kerbalism) | Current ISS water recovery figure on the water recycler | [PR #1233](https://github.com/Kerbalism/Kerbalism/pull/1233) (open) |
 | [Awesome Space](https://github.com/orbitalindex/awesome-space) | Listing for this repository under Mission Design | [PR #127](https://github.com/orbitalindex/awesome-space/pull/127) (merged) |
 
 ## Sources
