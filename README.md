@@ -35,9 +35,15 @@ Headline results:
 | [mars-sim](https://github.com/mars-sim/mars-sim) | NASA BVAD Rev2 sources for the settlement water rates | [PR #2159](https://github.com/mars-sim/mars-sim/pull/2159) (open) |
 | [selene-isru](https://github.com/dogum/selene-isru) | Gear ratio basis for lunar product used in orbit | [PR #21](https://github.com/dogum/selene-isru/pull/21) (open) |
 | [eclss-sizing-tool](https://github.com/dukesmith0/eclss-sizing-tool) | ISS water recovery with the Brine Processor (98%) as a sourced constant | [PR #1](https://github.com/dukesmith0/eclss-sizing-tool/pull/1) (open) |
-| [Astroid-miner](https://github.com/ksarith/Astroid-miner) | Water delivery gear ratio note | [PR #1](https://github.com/ksarith/Astroid-miner/pull/1) (open) |
+| [Astroid-miner](https://github.com/ksarith/Astroid-miner) | Water delivery gear ratio note | [PR #1](https://github.com/ksarith/Astroid-miner/pull/1) (merged) |
 | [Kerbalism](https://github.com/Kerbalism/Kerbalism) | Current ISS water recovery figure on the water recycler | [PR #1233](https://github.com/Kerbalism/Kerbalism/pull/1233) (open) |
+| [ROKerbalism](https://github.com/KSP-RO/ROKerbalism) | Current ISS water recovery figure on the water recycler | [PR #213](https://github.com/KSP-RO/ROKerbalism/pull/213) (open) |
+| [red-tonnes](https://github.com/fishygeek91/red-tonnes) | NASA source for the water recycle fraction, in the constants and the Sources drawer | [PR #6](https://github.com/fishygeek91/red-tonnes/pull/6) (open) |
+| [astrosim](https://github.com/aadriantech/astrosim) | NASA source for the default water recovery rate | [PR #1](https://github.com/aadriantech/astrosim/pull/1) (open) |
 | [Awesome Space](https://github.com/orbitalindex/awesome-space) | Listing for this repository under Mission Design | [PR #127](https://github.com/orbitalindex/awesome-space/pull/127) (merged) |
+| [Awesome Space Systems Simulation](https://github.com/aoezhb/awesome-space-systems-simulation) | Listing for this repository under Spacecraft subsystems | [PR #1](https://github.com/aoezhb/awesome-space-systems-simulation/pull/1) (open) |
+| [awesome-spacetech](https://github.com/dadevmate/awesome-spacetech) | Listing for this repository under life support tools | [PR #1](https://github.com/dadevmate/awesome-spacetech/pull/1) (open) |
+| [awesome-space (elburz)](https://github.com/elburz/awesome-space) | Listing for this repository under Software | [PR #12](https://github.com/elburz/awesome-space/pull/12) (open) |
 
 ## Sources
 
