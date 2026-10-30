@@ -32,7 +32,7 @@ Headline results:
 |---|---|---|
 | [sidus-tools](https://github.com/massimodeluisa/sidus-tools) | Crew water loop & resupply tool: daily water demand, recycling, loop closure and resupply mass, with NASA BVAD Rev2 defaults | [PR #212](https://github.com/massimodeluisa/sidus-tools/pull/212) (merged) |
 | [space-logistics-optimization](https://github.com/masaisaji/space-logistics-optimization) | Optional water recovery rate for lunar surface consumption | [PR #1](https://github.com/masaisaji/space-logistics-optimization/pull/1) (open) |
-| [mars-sim](https://github.com/mars-sim/mars-sim) | NASA BVAD Rev2 sources for the settlement water rates | [PR #2159](https://github.com/mars-sim/mars-sim/pull/2159) (open) |
+| [mars-sim](https://github.com/mars-sim/mars-sim) | NASA BVAD Rev2 sources for the settlement water rates | [PR #2159](https://github.com/mars-sim/mars-sim/pull/2159) (merged) |
 | [selene-isru](https://github.com/dogum/selene-isru) | Gear ratio basis for lunar product used in orbit | [PR #21](https://github.com/dogum/selene-isru/pull/21) (open) |
 | [eclss-sizing-tool](https://github.com/dukesmith0/eclss-sizing-tool) | ISS water recovery with the Brine Processor (98%) as a sourced constant | [PR #1](https://github.com/dukesmith0/eclss-sizing-tool/pull/1) (open) |
 | [Astroid-miner](https://github.com/ksarith/Astroid-miner) | Water delivery gear ratio note | [PR #1](https://github.com/ksarith/Astroid-miner/pull/1) (merged) |
@@ -43,7 +43,6 @@ Headline results:
 | [Awesome Space](https://github.com/orbitalindex/awesome-space) | Listing for this repository under Mission Design | [PR #127](https://github.com/orbitalindex/awesome-space/pull/127) (merged) |
 | [Awesome Space Systems Simulation](https://github.com/aoezhb/awesome-space-systems-simulation) | Listing for this repository under Spacecraft subsystems | [PR #1](https://github.com/aoezhb/awesome-space-systems-simulation/pull/1) (open) |
 | [awesome-spacetech](https://github.com/dadevmate/awesome-spacetech) | Listing for this repository under life support tools | [PR #1](https://github.com/dadevmate/awesome-spacetech/pull/1) (open) |
-| [awesome-space (elburz)](https://github.com/elburz/awesome-space) | Listing for this repository under Software | [PR #12](https://github.com/elburz/awesome-space/pull/12) (open) |
 
 ## Sources
 
